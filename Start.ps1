@@ -1,24 +1,21 @@
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+# if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 
-cd 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
+$configFile = join-path $pwd start.json
+$config = Get-Content $configFile | Out-String | ConvertFrom-Json
 
-# visual studio
-. '.\Visual Studio 2019.lnk'
+function RunLink ($path){
+    Invoke-Item -Path $path
+}
 
-# outlook
-. .\Outlook.lnk
-
-# explorer
-explorer C:\dev\src
-
-# slack
-cd 'C:\Users\Scott.Mackenzie\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Slack Technologies'
-. .\Slack.lnk
-
-# conemu
 push-location $pwd
-cd 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ConEmu\'
-. '.\ConEmu (x64).lnk'
-pop-location 
-
-Start-Process "chrome.exe"
+cd 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
+$config.tasks | foreach {
+    write-host $_.name
+    if ($_.type -eq 'lnk') {
+        RunLink($_.path)
+    }
+    if ($_.type -eq 'process') {
+        iex $_.cmd
+    }
+}
+pop-location

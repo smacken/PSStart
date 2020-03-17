@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "name": "Visual Studio",
+            "type": "lnk",
+            "path": ".\\Visual Studio 2019.lnk"
+        },
+        {
+            "name": "Outlook",
+            "type": "lnk",
+            "path": ".\\Outlook.lnk"
+        },
+        {
+            "name" : "Shell",
+            "type": "lnk",
+            "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ConEmu\\ConEmu (x64).lnk"
+        },
+        {
+            "name": "Dev",
+            "type": "process",
+            "cmd": "explorer C:\\dev\\src"
+        },
+        {
+            "name": "Slack",
+            "type": "lnk",
+            "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Slack Technologies\\Slack.lnk"
+        },
+        {
+            "name": "Chrome",
+            "type": "process",
+            "cmd": "Start-Process chrome.exe"
+        }
+    ]
+}
