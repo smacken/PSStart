@@ -1,0 +1,19 @@
+{
+    "tasks": [
+        {
+            "name": "Visual Studio",
+            "type": "lnk",
+            "path": ".\\Visual Studio 2019.lnk"
+        },
+        {
+            "name": "Explorer",
+            "type": "cmd",
+            "path": ".\\Visual Studio 2019.lnk"
+        },
+        {
+            "name": "Outlook",
+            "type": "lnk",
+            "path": ".\\Outlook.lnk"
+        }        
+    ]
+}
