@@ -4,14 +4,14 @@ $configFile = join-path $pwd start.json
 $config = Get-Content $configFile | Out-String | ConvertFrom-Json
 
 push-location $pwd
-cd 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
-$config.tasks | foreach {
+Set-Location 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
+$config.tasks | ForEach-Object {
     write-host $_.name
     if ($_.type -eq 'lnk') {
         Invoke-Item -Path $_.path
     }
     if ($_.type -eq 'process') {
-        iex $_.cmd
+        Invoke-Expression $_.cmd
     }
 }
 pop-location
